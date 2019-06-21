@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button';
-import Aux from '../hoc/Aux';
+import Aux from '../hoc/HigherOrder';
 
 const orderSummary = (props) => {
     const orderSummary = Object.keys(props.ingredients).map((igkey, i) => {

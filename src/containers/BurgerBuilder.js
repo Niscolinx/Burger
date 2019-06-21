@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Burger from '../components/Burger/Burger'
 import BuildControls from "../components/Burger/BuildControl/BuildControls"
 import Modal from "../components/Modal/Modal"
-import Aux from "../components/hoc/Aux"
+import Aux from "../components/hoc/HigherOrder"
 import withErrorHandler from "../components/hoc/withErrorHandler"
 import axios from "../axios"
 import Spinner from "../components/Layout/spinner"

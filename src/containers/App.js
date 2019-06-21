@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.scss'
 import Layout from "../components/Layout/Layout"
-import Aux from "../components/hoc/Aux"
+import Aux from "../components/hoc/HigherOrder"
 import BurgerBuilder from './BurgerBuilder'
 import {Route, Switch} from 'react-router-dom'
 import Checkout from '../containers/Checkout'

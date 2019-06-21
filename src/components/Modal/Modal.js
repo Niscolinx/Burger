@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../hoc/HigerOrder';
+import Aux from '../hoc/HigherOrder';
 import Backdrop from '../../components/Modal/Backdrop';
 
 class Modal extends Component{

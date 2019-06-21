@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../Logo';
 import NavigationItems from './NavigationItems';
 import Backdrop from '../../Modal/Backdrop';
-import Aux from '../../hoc/Aux';
+import Aux from '../../hoc/HigherOrder';
 
 const sideDrawer = (props) => {
     let assigned = ['sideDrawer', 'close'];
