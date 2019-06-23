@@ -30,10 +30,10 @@ const withErrorHandler = (WrappedComponent, axios) => {
         render(){
             return (
                 <Aux>
-                    <WrappedComponent {...this.props}/>
                 <Modal orderSummary = {this.state.error} clicked = {this.handleError}>
                     {this.state.error ? this.state.error.message:null}
                 </Modal>
+                    <WrappedComponent {...this.props}/>
             </Aux>
                 )
 

@@ -108,7 +108,7 @@ class BurgerBuilder extends Component {
   };
 
   addIngredient = type => {
-    const oldIngredient = this.props.ingredients[type];
+    const oldIngredient = this.state.ingredients[type];
     const transformedIng = oldIngredient + 1;
     const newIng = {
       ...this.props.ingredients
@@ -147,7 +147,7 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    let ingDisabled = { ...this.state.ingredients };
+    let ingDisabled = { ...this.props.ingredients };
     
     for (let ing in ingDisabled) {
       ingDisabled[ing] = ingDisabled[ing] <= 0;
@@ -164,7 +164,7 @@ class BurgerBuilder extends Component {
         <Spinner />
       </div>
     );
-    if (this.state.ingredients) {
+    if (this.props.ingredients) {
       burger = (
         <Aux>
           <Burger ingredients={this.props.ingredients} />
@@ -172,9 +172,9 @@ class BurgerBuilder extends Component {
             disabled={ingDisabled}
             summary={this.orderSummary}
             purchasable={this.state.purchasable}
-            addIngredient={() => this.props.onAddIngredient}
-            removeIngredient={() =>this.props.removeIngredient}
-            price={this.props.totalPrice}
+            addIngredient={this.props.onAddIngredient}
+            removeIngredient={this.props.onRemoveIngredient}
+            price={this.state.totalPrice}
           />
           ;
         </Aux>
@@ -185,7 +185,7 @@ class BurgerBuilder extends Component {
           orderSummary={this.state.orderSummary}
           cancelled={this.orderCancel}
           continue={this.orderContinue}
-          price={this.props.totalPrice}
+          price={this.state.totalPrice}
         />
       );
     }
@@ -214,8 +214,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onAddIngredient: () => dispatch({type: actionTypes.ADD_INGREDIENT}),
-    onRemoveIngredient: () => dispatch({type: actionTypes.REMOVE_INGREDIENT})
+    onAddIngredient: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName:ingName}),
+    onRemoveIngredient: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName})
   }
 }
 
