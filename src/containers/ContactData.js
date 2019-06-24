@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
 import Button from '../components/Modal/Button'
 import axios from '../axios'
@@ -87,7 +88,8 @@ class ContactData extends Component{
         value: '',
         validation: {}
       }
-    }
+    },
+    loading: false
   }
 
   checkValidity (value, rules){
@@ -117,11 +119,7 @@ class ContactData extends Component{
       orderForm:updatedOrderForm
     })
   }
-  priceHandler = (e) => {
-    this.setState({
-      price:e.target.value
-    })
-  }
+
 
   orderedBurger = (e) => {
     e.preventDefault()
@@ -139,10 +137,8 @@ class ContactData extends Component{
       .post("/orders.json", data)
       //alert('You continued!!')
       .then(response => {
-        this.setState({ loading: false, timeLoader: true });
-        if(this.state.timeLoader){
+        this.setState({ loading: false });
            this.props.history.push('/')
-        }
       })
       .catch(error => {
         this.setState({ loading: false });
@@ -208,4 +204,10 @@ class ContactData extends Component{
     }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+  return{
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice
+  }
+}
+export default connect(mapStateToProps)(ContactData);

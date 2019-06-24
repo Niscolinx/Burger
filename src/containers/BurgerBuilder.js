@@ -11,15 +11,9 @@ import Spinner from "../components/Layout/spinner"
 import OrderSummary from "../components/Modal/OrderSummary"
 import * as actionTypes from '../store/actions'
 
-const INGREDIENT_PRICES = {
-  salad: 0.8,
-  bacon: 1.7,
-  cheese: 2.3,
-  meat: 1
-};
+
 class BurgerBuilder extends Component {
   state = {
-    totalPrice: 4,
     purchasable: false,
     orderSummary: false,
     loading: false,
@@ -39,45 +33,10 @@ class BurgerBuilder extends Component {
   };
 
   orderContinue = () => {
-    // this.setState({ loading: true });
-    // const data = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: "Igboanugwo Collins",
-    //     address: {
-    //       zipcode: "453005",
-    //       street: "testingstreet 2",
-    //       country: "Germany"
-    //     },
-    //     email: "testing@test.com"
-    //   },
-    //   deliveryMethod: "fastest"
-    // };
-    // axios
-    //   .post("/orders.json", data)
-    //   //alert('You continued!!')
-    //   .then(response => {
-    //     this.setState({ loading: false, orderSummary: false });
-    //   })
-    //   .catch(error => {
-    //     this.setState({ loading: false, orderSummary: false });
-    //   });
+    
+    this.props.history.push('/Checkout');
 
-    const ingredients = {...this.props.ingredients}
-    let ingData = []
-    for(var ing in ingredients){
-      ingData.push(encodeURIComponent(ing) + '=' + encodeURIComponent(ingredients[ing]))
-    }
-    ingData.push('totalPrice=' + this.state.totalPrice)
-    const queryParam = ingData.join('&')
-    this.props.history.push({
-      pathname: '/Checkout',
-      search: '?' + queryParam
-    })
-  };
-
-  componentDidMount() {
+  //componentDidMount() {
     // axios
     //   .get("https://my-react-burger-1ce01.firebaseio.com/ingredients.json")
     //   .then(res => {
@@ -90,61 +49,15 @@ class BurgerBuilder extends Component {
     //   });
   }
   orderbtn = newIng => {
-    // const orderIng = Object.keys(newIng).map(igkey => {
-    //     return newIng[igkey]
-    //   }
-    // )
-    // .reduce((orderIng, el) => {
-    //     return orderIng + el
-    // },0)
 
     const orderIng = Object.values(newIng).reduce((orderIng, el) => {
       return orderIng + el;
     }, 0);
 
-    this.setState({
-      purchasable: orderIng > 0
-    });
-  };
+    
+    return orderIng > 0
+   };
 
-  addIngredient = type => {
-    const oldIngredient = this.state.ingredients[type];
-    const transformedIng = oldIngredient + 1;
-    const newIng = {
-      ...this.props.ingredients
-    };
-    newIng[type] = transformedIng;
-
-    const oldPrice = INGREDIENT_PRICES[type];
-    const prices = this.state.totalPrice;
-    const newPrice = prices + oldPrice;
-    this.setState({
-      ingredients: newIng,
-      totalPrice: newPrice
-    });
-    this.orderbtn(newIng);
-  };
-
-  removeIngredient = type => {
-    const oldIngredient = this.state.ingredients[type];
-    if (oldIngredient <= 0) {
-      return;
-    }
-    const transformedIng = oldIngredient - 1;
-    const newIng = {
-      ...this.state.ingredients
-    };
-    newIng[type] = transformedIng;
-
-    const oldPrice = INGREDIENT_PRICES[type];
-    const prices = this.state.totalPrice;
-    const newPrice = prices - oldPrice;
-    this.setState({
-      ingredients: newIng,
-      totalPrice: newPrice
-    });
-    this.orderbtn(newIng);
-  };
 
   render() {
     let ingDisabled = { ...this.props.ingredients };
@@ -171,10 +84,10 @@ class BurgerBuilder extends Component {
           <BuildControls
             disabled={ingDisabled}
             summary={this.orderSummary}
-            purchasable={this.state.purchasable}
+            purchasable={this.orderbtn(this.props.ingredients)}
             addIngredient={this.props.onAddIngredient}
             removeIngredient={this.props.onRemoveIngredient}
-            price={this.state.totalPrice}
+            price={this.props.totalPrice}
           />
           ;
         </Aux>
@@ -185,7 +98,7 @@ class BurgerBuilder extends Component {
           orderSummary={this.state.orderSummary}
           cancelled={this.orderCancel}
           continue={this.orderContinue}
-          price={this.state.totalPrice}
+          price={this.props.totalPrice}
         />
       );
     }
@@ -210,6 +123,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
+    totalPrice: state.totalPrice,
+    purchasable: state.purchasable
   }
 }
 const mapDispatchToProps = dispatch => {
