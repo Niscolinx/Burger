@@ -4,11 +4,21 @@ import './sass/main.scss';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './store/reducers/reducer'
 
-const store = createStore(reducer)
+const logger = store => {
+    return next => {
+        return action =>{
+            console.log('[MiddleWare]', action)
+            const result = next(action)
+            console.log('dispatching the action', store.getState())
+            return result
+        }
+    }
+}
+const store = createStore(reducer, applyMiddleware(logger))
 const app = (
     <Provider store = {store}>
     <BrowserRouter>
