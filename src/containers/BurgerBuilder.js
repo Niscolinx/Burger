@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import Burger from '../components/Burger/Burger'
 import BuildControls from "../components/Burger/BuildControl/BuildControls"
@@ -9,7 +9,7 @@ import withErrorHandler from "../components/hoc/withErrorHandler"
 import axios from "../axios"
 import Spinner from "../components/Layout/spinner"
 import OrderSummary from "../components/Modal/OrderSummary"
-import * as actionTypes from '../store/actions'
+import * as actionTypes from '../store/actions/actionTypes'
 
 
 class BurgerBuilder extends Component {
@@ -33,10 +33,10 @@ class BurgerBuilder extends Component {
   };
 
   orderContinue = () => {
-    
+
     this.props.history.push('/Checkout');
 
-  //componentDidMount() {
+    //componentDidMount() {
     // axios
     //   .get("https://my-react-burger-1ce01.firebaseio.com/ingredients.json")
     //   .then(res => {
@@ -54,29 +54,29 @@ class BurgerBuilder extends Component {
       return orderIng + el;
     }, 0);
 
-    
+
     return orderIng > 0
-   };
+  };
 
 
   render() {
     let ingDisabled = { ...this.props.ingredients };
-    
+
     for (let ing in ingDisabled) {
       ingDisabled[ing] = ingDisabled[ing] <= 0;
     }
     let totalSummary = null;
 
     let burger = this.state.error ? (
-      <p style ={{
+      <p style={{
         textAlign: 'center',
         fontSize: '1.4rem'
       }}>Ingredients can't be loaded. Please check your internet connection</p>
     ) : (
-      <div style={{ textAlign: "center" }}>
-        <Spinner />
-      </div>
-    );
+        <div style={{ textAlign: "center" }}>
+          <Spinner />
+        </div>
+      );
     if (this.props.ingredients) {
       burger = (
         <Aux>
@@ -129,8 +129,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onAddIngredient: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName:ingName}),
-    onRemoveIngredient: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName})
+    onAddIngredient: (ingName) => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ingName }),
+    onRemoveIngredient: (ingName) => dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName })
   }
 }
 
