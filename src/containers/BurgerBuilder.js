@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import Burger from '../components/Burger/Burger'
 import BuildControls from "../components/Burger/BuildControl/BuildControls"
@@ -9,15 +9,12 @@ import withErrorHandler from "../components/hoc/withErrorHandler"
 import axios from "../axios"
 import Spinner from "../components/Layout/spinner"
 import OrderSummary from "../components/Modal/OrderSummary"
-import * as actionTypes from '../store/actions'
+import * as burgerActions from '../store/actions/burgerIndex'
 
 
 class BurgerBuilder extends Component {
   state = {
-    purchasable: false,
     orderSummary: false,
-    loading: false,
-    error: false
   };
 
   orderSummary = () => {
@@ -33,50 +30,41 @@ class BurgerBuilder extends Component {
   };
 
   orderContinue = () => {
-    
     this.props.history.push('/Checkout');
-
-  //componentDidMount() {
-    // axios
-    //   .get("https://my-react-burger-1ce01.firebaseio.com/ingredients.json")
-    //   .then(res => {
-    //     this.setState({
-    //       ingredients: res.data
-    //     });
-    //   })
-    //   .catch(error => {
-    //     this.setState({ error: true });
-    //   });
   }
+  componentDidMount() {
+    this.props.onInitIngredients()
+  };
+
   orderbtn = newIng => {
 
     const orderIng = Object.values(newIng).reduce((orderIng, el) => {
       return orderIng + el;
     }, 0);
 
-    
+
     return orderIng > 0
-   };
+  };
 
 
   render() {
     let ingDisabled = { ...this.props.ingredients };
-    
+
     for (let ing in ingDisabled) {
       ingDisabled[ing] = ingDisabled[ing] <= 0;
     }
     let totalSummary = null;
 
-    let burger = this.state.error ? (
-      <p style ={{
+    let burger = this.props.error ? (
+      <p style={{
         textAlign: 'center',
         fontSize: '1.4rem'
       }}>Ingredients can't be loaded. Please check your internet connection</p>
     ) : (
-      <div style={{ textAlign: "center" }}>
-        <Spinner />
-      </div>
-    );
+        <div style={{ textAlign: "center" }}>
+          <Spinner />
+        </div>
+      );
     if (this.props.ingredients) {
       burger = (
         <Aux>
@@ -102,16 +90,13 @@ class BurgerBuilder extends Component {
         />
       );
     }
-    if (this.state.loading) {
-      totalSummary = <Spinner />;
-    }
 
     return (
       <div>
         <Modal
           orderSummary={this.state.orderSummary}
-          clicked={this.orderCancel}
-        >
+          clicked={this.orderCancel}>
+
           {totalSummary}
         </Modal>
         {burger}
@@ -124,13 +109,14 @@ const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
     totalPrice: state.totalPrice,
-    purchasable: state.purchasable
+    error: state.error
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onAddIngredient: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName:ingName}),
-    onRemoveIngredient: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName})
+    onAddIngredient: (ingName) => dispatch(burgerActions.addIngredient(ingName)),
+    onRemoveIngredient: (ingName) => dispatch(burgerActions.removeIngredient(ingName)),
+    onInitIngredients: () => dispatch(burgerActions.initIngredients())
   }
 }
 
