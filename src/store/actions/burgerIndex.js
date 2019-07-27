@@ -1,7 +1,7 @@
 export {
     removeIngredient,
     addIngredient,
-    initIngredients
+    setIngredients
 } from './burgerBuilder'
 
-export { } from './order'
+export { initBurgerStart, orderRedirect } from './order'

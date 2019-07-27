@@ -9,7 +9,7 @@ import withErrorHandler from "../components/hoc/withErrorHandler"
 import axios from "../axios"
 import Spinner from "../components/Layout/spinner"
 import OrderSummary from "../components/Modal/OrderSummary"
-import * as actionTypes from '../store/actions/actionTypes'
+import * as burgerActions from '../store/actions/burgerIndex'
 
 
 class BurgerBuilder extends Component {
@@ -32,18 +32,6 @@ class BurgerBuilder extends Component {
   orderContinue = () => {
 
     this.props.history.push('/Checkout');
-
-    //componentDidMount() {
-    // axios
-    //   .get("https://my-react-burger-1ce01.firebaseio.com/ingredients.json")
-    //   .then(res => {
-    //     this.setState({
-    //       ingredients: res.data
-    //     });
-    //   })
-    //   .catch(error => {
-    //     this.setState({ error: true });
-    //   });
   }
   componentDidMount() {
     this.props.onInitIngredients()
@@ -68,7 +56,7 @@ class BurgerBuilder extends Component {
     }
     let totalSummary = null;
 
-    let burger = this.state.error ? (
+    let burger = this.props.error ? (
       <p style={{
         textAlign: 'center',
         fontSize: '1.4rem'
@@ -120,15 +108,16 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
-    error: state.error
+    ingredients: state.burger.ingredients,
+    totalPrice: state.burger.totalPrice,
+    error: state.burger.error
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onAddIngredient: (ingName) => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ingName }),
-    onRemoveIngredient: (ingName) => dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName })
+    onAddIngredient: (ingName) => dispatch(burgerActions.addIngredient(ingName)),
+    onRemoveIngredient: (ingName) => dispatch(burgerActions.removeIngredient(ingName)),
+    onInitIngredients: () => dispatch(burgerActions.setIngredients())
   }
 }
 
