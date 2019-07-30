@@ -4,6 +4,30 @@ import './sass/main.scss';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
+<<<<<<< HEAD
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './store/reducers/reducer'
+
+const logger = store => {
+    return next => {
+        return action =>{
+            console.log('[MiddleWare]', action)
+            const result = next(action)
+            console.log('dispatching the action', store.getState())
+            return result
+        }
+    }
+}
+const store = createStore(reducer, applyMiddleware(logger))
+const app = (
+    <Provider store = {store}>
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>
+    </Provider>
+    )
+=======
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import burgerBuilder from './store/reducers/burgerBuilder'
@@ -24,6 +48,7 @@ const app = (
         </BrowserRouter>
     </Provider>
 )
+>>>>>>> 611a6124cd4ef3cb3c7791d08b17fa91f05b95fc
 
 ReactDOM.render(app, document.getElementById('root'));
 
