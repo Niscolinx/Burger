@@ -40,3 +40,52 @@ export const initBurgerStart = (data) => {
             });
     }
 }
+
+export const fetchedOrderStart = () => {
+    return {
+        type: orderActions.FETCHED_ORDERS_START
+    }
+}
+
+export const fetchedOrdersFailed = err => {
+    return {
+        type: orderActions.FETCHED_ORDERS_FAILED,
+        err: err
+    }
+}
+
+export const fetchedOrderDelete = (orders) => {
+    return {
+        type: orderActions.FETCHED_ORDERS_DELETE,
+        id: orders.id
+    }
+}
+
+export const fetchedOrderSuccess = (order) => {
+    return {
+        type: orderActions.FETCHED_ORDERS_SUCCESS,
+        orders: order
+    }
+}
+
+export const fetchedOrdersInit = () => {
+    return dispatch => {
+        dispatch(fetchedOrderStart())
+        axios.get('/orders.json')
+            .then(res => {
+                const fetchedOrders = []
+                for (let key in res.data) {
+                    fetchedOrders.push({
+                        ...res.data[key],
+                        id: key
+                    })
+                }
+                dispatch(fetchedOrderSuccess(fetchedOrders))
+                dispatch(fetchedOrderDelete(fetchedOrders))
+            })
+            .catch(err => {
+                dispatch(fetchedOrdersFailed(err))
+            })
+    }
+
+}
