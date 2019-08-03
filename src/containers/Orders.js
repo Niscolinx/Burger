@@ -9,11 +9,11 @@ import Spinner from '../components/Layout/spinner'
 class Orders extends Component {
 
     componentDidMount() {
-        this.props.fetchedOrdersInit()
+        this.props.onInitFetchedOrders()
     }
 
     render() {
-        let spinner = <Spinner />
+        let spinner = <div style={{ textAlign: "center" }}><Spinner /></div>
         if (!this.props.loading) {
             spinner = this.props.order.map(order => {
                 return <Order
@@ -21,6 +21,7 @@ class Orders extends Component {
                     key={order.id}
                     ingredients={order.ingredients}
                 />
+
             })
         }
         return spinner
@@ -29,7 +30,7 @@ class Orders extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.order.loading,
-        order: state.order.orders
+        order: state.order.order
     }
 }
 const mapDispatchToProps = dispatch => {

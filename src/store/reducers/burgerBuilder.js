@@ -38,17 +38,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredients: action.ingredients,
-                error: false
+                error: false,
+                totalPrice: 4
             }
         case actionTypes.LOAD_INGREDIENTS_FAILED:
             return {
                 ...state,
                 error: true
-            }
-        case actionTypes.ORDER_REDIRECT:
-            return {
-                ...state,
-                totalPrice: 4
             }
 
         default:

@@ -56,7 +56,6 @@ const orderReducer = (state = initialState, action) => {
         case orderActions.FETCHED_ORDERS_DELETE:
             return {
                 ...state,
-                order: []
             }
 
         default:
