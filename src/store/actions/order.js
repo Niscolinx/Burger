@@ -38,7 +38,6 @@ export const initBurgerStart = (data) => {
             .catch(error => {
                 dispatch(orderBurgerFailed(error))
             });
-        this.props.fetchedOrderDelete(data)
     }
 }
 
@@ -55,10 +54,10 @@ export const fetchedOrdersFailed = err => {
     }
 }
 
-export const fetchedOrderDelete = (orders) => {
+export const fetchedOrderDelete = (id) => {
     return {
         type: orderActions.FETCHED_ORDERS_DELETE,
-        id: orders
+        id: id
     }
 }
 

@@ -14,6 +14,7 @@ const orderReducer = (state = initialState, action) => {
                 ...action.orderData,
                 id: action.orderId
             }
+            console.log(newOrder.id)
             return {
                 ...state,
                 loading: false,
@@ -54,8 +55,11 @@ const orderReducer = (state = initialState, action) => {
                 error: action.error
             }
         case orderActions.FETCHED_ORDERS_DELETE:
+            const orders = [...state.order]
+            const updateOrders = orders.filter(order => order.id !== action.id)
             return {
                 ...state,
+                order: updateOrders
             }
 
         default:

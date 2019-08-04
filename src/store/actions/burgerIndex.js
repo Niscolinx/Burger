@@ -4,4 +4,9 @@ export {
     setIngredients
 } from './burgerBuilder'
 
-export { initBurgerStart, orderRedirect, fetchedOrdersInit } from './order'
+export {
+    initBurgerStart,
+    orderRedirect,
+    fetchedOrdersInit,
+    fetchedOrderDelete
+} from './order'

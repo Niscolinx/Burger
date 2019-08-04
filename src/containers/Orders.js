@@ -17,6 +17,7 @@ class Orders extends Component {
         if (!this.props.loading) {
             spinner = this.props.order.map(order => {
                 return <Order
+                    clicked={() => this.props.onDeleteOrder(order.id)}
                     price={order.price}
                     key={order.id}
                     ingredients={order.ingredients}
@@ -35,7 +36,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onInitFetchedOrders: () => dispatch(actions.fetchedOrdersInit())
+        onInitFetchedOrders: () => dispatch(actions.fetchedOrdersInit()),
+        onDeleteOrder: (id) => dispatch(actions.fetchedOrderDelete(id))
     }
 }
 
