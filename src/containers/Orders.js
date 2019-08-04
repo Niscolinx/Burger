@@ -13,8 +13,10 @@ class Orders extends Component {
     }
 
     render() {
+        let button = ''
         let spinner = <div style={{ textAlign: "center" }}><Spinner /></div>
         if (!this.props.loading) {
+            button = <button className='deleteAllBtn' onClick={() => this.props.onDeleteAllOrders()}>Clear All</button>
             spinner = this.props.order.map(order => {
                 return <Order
                     clicked={() => this.props.onDeleteOrder(order.id)}
@@ -25,7 +27,7 @@ class Orders extends Component {
 
             })
         }
-        return spinner
+        return <div> {button} {spinner}</div>
     }
 }
 const mapStateToProps = state => {
@@ -37,7 +39,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onInitFetchedOrders: () => dispatch(actions.fetchedOrdersInit()),
-        onDeleteOrder: (id) => dispatch(actions.fetchedOrderDelete(id))
+        onDeleteOrder: (id) => dispatch(actions.fetchedOrderDelete(id)),
+        onDeleteAllOrders: () => dispatch(actions.deleteAllOrders())
     }
 }
 

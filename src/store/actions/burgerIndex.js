@@ -8,5 +8,6 @@ export {
     initBurgerStart,
     orderRedirect,
     fetchedOrdersInit,
-    fetchedOrderDelete
+    fetchedOrderDelete,
+    deleteAllOrders
 } from './order'

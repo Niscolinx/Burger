@@ -61,6 +61,11 @@ const orderReducer = (state = initialState, action) => {
                 ...state,
                 order: updateOrders
             }
+        case orderActions.DELELTE_ALL_ORDERS:
+            return {
+                ...state,
+                order: []
+            }
 
         default:
             return state

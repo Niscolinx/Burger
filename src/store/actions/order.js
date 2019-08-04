@@ -61,6 +61,12 @@ export const fetchedOrderDelete = (id) => {
     }
 }
 
+export const deleteAllOrders = () => {
+    return {
+        type: orderActions.DELELTE_ALL_ORDERS
+    }
+}
+
 export const fetchedOrderSuccess = (order) => {
     return {
         type: orderActions.FETCHED_ORDERS_SUCCESS,
