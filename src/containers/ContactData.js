@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Button from '../components/Modal/Button'
 import axios from '../axios'
 import Spinner from '../components/Layout/spinner'
-import Form from '../components/Layout/Form'
+import Input from '../components/Layout/Input'
 import withErrorHandler from '../components/hoc/withErrorHandler'
 import * as orderAction from '../store/actions/burgerIndex'
 
@@ -170,7 +170,7 @@ class ContactData extends Component {
     else {
       form = <form className='contactForm'>
         {elementTypeArr.map(elementType => {
-          return <Form
+          return <Input
             isTouched={elementType.config.isTouched}
             validate={elementType.config.valid}
             key={elementType.id}

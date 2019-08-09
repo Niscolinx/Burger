@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import Button from '../components/Modal/Button'
-import Form from '../components/Layout/Form'
+import Input from '../components/Layout/Input'
 
 class Auth extends Component {
     state = {
         control: {
-            name: {
+            email: {
                 elementType: 'input',
                 config: {
                     type: 'text',
@@ -56,7 +56,7 @@ class Auth extends Component {
             control: updatedOrderForm
         })
     }
-    orderedBurger = (e) => {
+    loginButton = (e) => {
         e.preventDefault()
         let loginData = {}
         for (let formValue in this.state.control) {
@@ -66,7 +66,7 @@ class Auth extends Component {
     }
 
     buttonProps = () => {
-        let buttonProps = 'disAbled'
+        let buttonProps = 'Success'
         let disabledArr = []
         let buttonKeys = { ...this.state.control }
         for (let ifValid in buttonKeys) {
@@ -89,7 +89,7 @@ class Auth extends Component {
         }
         let form = <form className='contactForm'>
             {elementTypeArr.map(elementType => {
-                return <Form
+                return <Input
                     isTouched={elementType.config.isTouched}
                     validate={elementType.config.valid}
                     key={elementType.id}
