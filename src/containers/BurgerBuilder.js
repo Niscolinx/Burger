@@ -9,11 +9,7 @@ import withErrorHandler from "../components/hoc/withErrorHandler"
 import axios from "../axios"
 import Spinner from "../components/Layout/spinner"
 import OrderSummary from "../components/Modal/OrderSummary"
-<<<<<<< HEAD
-import * as burgerActions from '../store/actions/burgerIndex'
-=======
 import * as actions from '../store/actions/burgerIndex'
->>>>>>> 39b880fee8e755f9765ca78e4dea8ae10a8ec21a
 
 
 class BurgerBuilder extends Component {
@@ -34,11 +30,7 @@ class BurgerBuilder extends Component {
   };
 
   orderContinue = () => {
-<<<<<<< HEAD
-
-=======
     this.props.onOrderRedirect()
->>>>>>> 39b880fee8e755f9765ca78e4dea8ae10a8ec21a
     this.props.history.push('/Checkout');
   }
   componentDidMount() {
@@ -122,16 +114,10 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-<<<<<<< HEAD
-    onAddIngredient: (ingName) => dispatch(burgerActions.addIngredient(ingName)),
-    onRemoveIngredient: (ingName) => dispatch(burgerActions.removeIngredient(ingName)),
-    onInitIngredients: () => dispatch(burgerActions.setIngredients())
-=======
     onAddIngredient: (ingName) => dispatch(actions.addIngredient(ingName)),
     onRemoveIngredient: (ingName) => dispatch(actions.removeIngredient(ingName)),
     onInitIngredients: () => dispatch(actions.setIngredients()),
     onOrderRedirect: () => dispatch(actions.orderRedirect())
->>>>>>> 39b880fee8e755f9765ca78e4dea8ae10a8ec21a
   }
 }
 
