@@ -13,14 +13,6 @@ const INGREDIENT_PRICES = {
     meat: 1
 };
 
-// const orderBtn = (state) => {
-
-//     const orderIng = Object.values(state).reduce((orderIng, el) => {
-//         return orderIng + el;
-//     }, 0);
-
-//     return orderIng > 0
-// }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
@@ -46,17 +38,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredients: action.ingredients,
-                error: false
+                error: false,
+                totalPrice: 4
             }
         case actionTypes.LOAD_INGREDIENTS_FAILED:
             return {
                 ...state,
                 error: true
-            }
-        case actionTypes.ORDER_REDIRECT:
-            return {
-                ...state,
-                totalPrice: 4
             }
 
         default:

@@ -34,7 +34,6 @@ export const setIngredients = () => {
                 dispatch(initIngredients(res.data))
             })
             .catch(error => {
-                console.log(error)
                 dispatch(loadIngFailed())
             })
     }
