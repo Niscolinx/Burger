@@ -42,9 +42,11 @@ export const initBurgerStart = (data) => {
 }
 
 export const fetchedOrderStart = () => {
+
     return {
         type: orderActions.FETCHED_ORDERS_START
     }
+
 }
 
 export const fetchedOrdersFailed = err => {

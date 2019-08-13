@@ -196,6 +196,7 @@
     left: 0;
 }
 
+//BUTTON
 .orderbutton {
     background-color: transparent;
     border: none;
@@ -215,6 +216,22 @@
     }
 
 }
+
+.loginButton:first-of-type {
+
+    @media (min-width: 768px) {
+        margin-left: 10rem;
+    }
+
+    @media (min-width: 1024px) {
+        margin-left: 16rem;
+    }
+
+    @media (min-width: 1440px) {
+        margin-left: 18rem;
+    }
+}
+
 
 .Success {
     color: #5C9210;

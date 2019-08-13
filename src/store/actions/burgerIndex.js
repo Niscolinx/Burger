@@ -11,3 +11,5 @@ export {
     fetchedOrderDelete,
     deleteAllOrders
 } from './order'
+
+export {initAuth} from './Auth'

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Button from '../components/Modal/Button'
 import Input from '../components/Layout/Input'
+import { connect } from 'react-redux'
+import * as actions from '../store/actions/burgerIndex'
 
 class Auth extends Component {
     state = {
@@ -45,16 +47,20 @@ class Auth extends Component {
         return isValid
     }
     nameHandler = (e, id) => {
-        const updatedOrderForm = { ...this.state.control }
-        const updatedKeys = { ...updatedOrderForm[id] }
-        updatedKeys.value = e.target.value
-        updatedKeys.valid = this.checkValidity(updatedKeys.value, updatedKeys.validation)
-        updatedKeys.isTouched = true
-        updatedOrderForm[id] = updatedKeys
+        const updatedOrderForm = {
+            ...this.state.control,
+            [id]: {
+                ...this.state.control[id],
+                value: e.target.value,
+                valid: this.checkValidity(e.target.value, this.state.control[id].validation),
+                isTouched: true,
 
+            },
+        }
         this.setState({
             control: updatedOrderForm
         })
+
     }
     loginButton = (e) => {
         e.preventDefault()
@@ -62,19 +68,20 @@ class Auth extends Component {
         for (let formValue in this.state.control) {
             loginData[formValue] = this.state.control[formValue].value
         }
-
+        this.props.onInitAuth(this.state.control.email.value, this.state.control.email.value)
     }
 
+
     buttonProps = () => {
-        let buttonProps = 'Success'
+        let buttonProps = 'disAbled loginButton'
         let disabledArr = []
         let buttonKeys = { ...this.state.control }
         for (let ifValid in buttonKeys) {
             if (buttonKeys[ifValid].valid === true) {
                 disabledArr.push(ifValid)
             }
-            if (disabledArr.length === 6) {
-                buttonProps = 'Success'
+            if (disabledArr.length === 2) {
+                buttonProps = 'Success loginButton'
             }
         }
         return buttonProps
@@ -111,6 +118,12 @@ class Auth extends Component {
             </div>
         )
     }
+
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onInitAuth: (email, password) => dispatch(actions.initAuth(email, password))
+    }
 }
 
-export default Auth;
+export default connect(null, mapDispatchToProps)(Auth);
