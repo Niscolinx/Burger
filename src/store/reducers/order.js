@@ -46,7 +46,7 @@ const orderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                order: action.orders
+                order: action.orders.reverse()
             }
         case orderActions.FETCHED_ORDERS_FAILED:
             return {
