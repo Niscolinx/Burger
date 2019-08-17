@@ -34,7 +34,8 @@ class Auth extends Component {
                 valid: false,
                 isTouched: false
             }
-        }
+        },
+        isSignUp: true
     }
     checkValidity(value, rules) {
         let isValid = true
@@ -64,11 +65,7 @@ class Auth extends Component {
     }
     loginButton = (e) => {
         e.preventDefault()
-        let loginData = {}
-        for (let formValue in this.state.control) {
-            loginData[formValue] = this.state.control[formValue].value
-        }
-        this.props.onInitAuth(this.state.control.email.value, this.state.control.email.value)
+        this.props.onInitAuth(this.state.control.email.value, this.state.control.email.value, this.state.isSignUp)
     }
 
 
@@ -86,6 +83,13 @@ class Auth extends Component {
         }
         return buttonProps
     }
+    toggleLogin = () => {
+        this.setState(prevState => {
+            return {
+                isSignUp: !prevState.isSignUp
+            }
+        })
+    }
     render() {
         let elementTypeArr = []
         for (let key in this.state.control) {
@@ -94,7 +98,7 @@ class Auth extends Component {
                 config: this.state.control[key]
             })
         }
-        let form = <form className='contactForm'>
+        let form = <div className='contactForm'>
             {elementTypeArr.map(elementType => {
                 return <Input
                     isTouched={elementType.config.isTouched}
@@ -107,14 +111,17 @@ class Auth extends Component {
                 />
 
             })}
-            <Button
-                btnType={this.buttonProps()}
-                clicked={this.loginButton}>Login</Button>
-        </form>
+        </div>
 
         return (
-            <div>
-                {form}
+            <div className='loginForm'>
+                <form onSubmit={this.loginButton}>
+                    {form}
+                    <Button
+                        btnType={this.buttonProps()}>submit
+                    </Button>
+                </form>
+                <Button clicked={this.toggleLogin}> switch to {this.state.isSignUp ? 'Login' : 'SignUp'}</Button>
             </div>
         )
     }
@@ -122,7 +129,7 @@ class Auth extends Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onInitAuth: (email, password) => dispatch(actions.initAuth(email, password))
+        onInitAuth: (email, password, isSignUp) => dispatch(actions.initAuth(email, password, isSignUp))
     }
 }
 

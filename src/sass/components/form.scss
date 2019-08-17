@@ -1,13 +1,14 @@
-.contactData{
+.contactData {
     text-align: center;
 }
-.contactForm{
+
+.contactForm {
     padding: 1rem .5rem;
     width: 50%;
     margin: 0 auto;
 
     input,
-    select{
+    select {
         width: 100%;
         padding: 1rem .8rem;
         font-size: 1rem;
@@ -16,25 +17,31 @@
         border: 1px solid #ccc;
         box-shadow: 6px 1px 10px 5px #ccc;
 
-        &:focus{
+        &:focus {
             background: #ccc;
             outline: none;
         }
     }
-    select{
+
+    select {
         width: 105%;
     }
 }
 
-.label{
+.label {
     display: block;
     font-weight: 700;
     padding: 10px 0px;
 }
-.notValid{
+
+.notValid {
     background: rgb(179, 111, 102);
-    
-    &::placeholder{
+
+    &::placeholder {
         color: #ccc;
     }
+}
+
+.loginForm {
+    text-align: center;
 }
