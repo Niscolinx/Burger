@@ -35,7 +35,7 @@ class Auth extends Component {
                 isTouched: false
             }
         },
-        isSignUp: true
+        isLogin: true
     }
     checkValidity(value, rules) {
         let isValid = true
@@ -65,7 +65,7 @@ class Auth extends Component {
     }
     loginButton = (e) => {
         e.preventDefault()
-        this.props.onInitAuth(this.state.control.email.value, this.state.control.email.value, this.state.isSignUp)
+        this.props.onInitAuth(this.state.control.email.value, this.state.control.email.value, this.state.isLogin)
     }
 
 
@@ -86,7 +86,7 @@ class Auth extends Component {
     toggleLogin = () => {
         this.setState(prevState => {
             return {
-                isSignUp: !prevState.isSignUp
+                isLogin: !prevState.isLogin
             }
         })
     }
@@ -121,7 +121,7 @@ class Auth extends Component {
                         btnType={this.buttonProps()}>submit
                     </Button>
                 </form>
-                <Button clicked={this.toggleLogin}> switch to {this.state.isSignUp ? 'Login' : 'SignUp'}</Button>
+                <Button clicked={this.toggleLogin}> switch to {this.state.isLogin ? 'SignUp' : 'Login'}</Button>
             </div>
         )
     }
@@ -129,7 +129,7 @@ class Auth extends Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onInitAuth: (email, password, isSignUp) => dispatch(actions.initAuth(email, password, isSignUp))
+        onInitAuth: (email, password, isLogin) => dispatch(actions.initAuth(email, password, isLogin))
     }
 }
 
