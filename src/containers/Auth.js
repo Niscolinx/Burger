@@ -3,6 +3,7 @@ import Button from '../components/Modal/Button'
 import Input from '../components/Layout/Input'
 import { connect } from 'react-redux'
 import * as actions from '../store/actions/burgerIndex'
+import Spinner from '../components/Layout/spinner'
 
 class Auth extends Component {
     state = {
@@ -112,6 +113,10 @@ class Auth extends Component {
 
             })}
         </div>
+        let spinner;
+        if (this.props.loading) {
+            spinner = <Spinner />
+        }
 
         return (
             <div className='loginForm'>
@@ -122,10 +127,18 @@ class Auth extends Component {
                     </Button>
                 </form>
                 <Button clicked={this.toggleLogin}> switch to {this.state.isLogin ? 'SignUp' : 'Login'}</Button>
+                <div style={{ textAlign: 'center' }}>
+                    {spinner}
+                </div>
             </div>
         )
     }
 
+}
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading
+    }
 }
 const mapDispatchToProps = dispatch => {
     return {
@@ -133,4 +146,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
