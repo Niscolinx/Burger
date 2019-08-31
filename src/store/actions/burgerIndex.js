@@ -12,4 +12,5 @@ export {
     deleteAllOrders
 } from './order'
 
-export {initAuth} from './Auth'
+export { initAuth } from './Auth'
+

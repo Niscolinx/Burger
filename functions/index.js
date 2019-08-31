@@ -8,7 +8,6 @@
 // });
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions');
-
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
 admin.initializeApp();
@@ -22,4 +21,14 @@ exports.addMessage = functions.https.onRequest(async (req, res) => {
     const snapshot = await admin.database().ref('/messages').push({ original: original });
     // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
     res.redirect(303, snapshot.ref.toString());
+    console.log(req, res, 'from firebase')
+});
+
+const cors = require('cors')
+const corsHandler = cors({ origin: true });
+
+export const pingFunctionWithCorsAllowed = functions.https.onRequest((request, response) => {
+    corsHandler(request, response, () => {
+        response.send(`Ping from Firebase (with CORS handling)! ${new Date().toISOString()}`);
+    });
 });
