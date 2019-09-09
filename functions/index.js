@@ -27,8 +27,31 @@ exports.addMessage = functions.https.onRequest(async (req, res) => {
 const cors = require('cors')
 const corsHandler = cors({ origin: true });
 
-export const pingFunctionWithCorsAllowed = functions.https.onRequest((request, response) => {
+exports.pingFunctionWithCorsAllowed = functions.https.onRequest((request, response) => {
     corsHandler(request, response, () => {
         response.send(`Ping from Firebase (with CORS handling)! ${new Date().toISOString()}`);
-    });
+        const info = {
+            email: email,
+            password: password,
+            returnSecureToken: true
+        }
+        return dispatch => {
+            dispatch(authStart())
+            let url = 'https:dentitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
+            if (!isLogin) {
+                url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
+            }
+            console.log(url)
+            axios.post(url, info)
+                .then(res => {
+                    console.log(res)
+                    alert('success')
+                    dispatch(authSuccess(res.data))
+                })
+                .catch(err => {
+                    console.log(err)
+                    alert('error')
+                    dispatch(authFailed(err))
+                })
+        });
 });

@@ -29,9 +29,9 @@ export const initAuth = (email, password, isLogin) => {
     }
     return dispatch => {
         dispatch(authStart())
-        let url = 'https:dentitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
+        let url = 'https://cors-anywhere.herokuapp.com/https:dentitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
         if (!isLogin) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
+            url = 'https://cors-anywhere.herokuapp.com/https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
         }
         console.log(url)
         axios.post(url, info)
