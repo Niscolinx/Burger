@@ -7,7 +7,7 @@ const navigation = () => (
         <NavigationItem link="/" exact>Burger Builder</NavigationItem>
         <NavigationItem link="/Checkout/checkout-data">Checkout</NavigationItem>
         <NavigationItem link="/Orders">Orders</NavigationItem>
-        <NavigationItem link='/Auth'>Login</NavigationItem>
+        <NavigationItem link='/Auth/login'>Login</NavigationItem>
     </ul>
 )
 

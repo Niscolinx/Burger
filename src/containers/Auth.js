@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 import * as actions from '../store/actions/burgerIndex'
 import Spinner from '../components/Layout/spinner'
 
+
 class Auth extends Component {
+
     state = {
         control: {
             email: {
@@ -36,8 +38,78 @@ class Auth extends Component {
                 isTouched: false
             }
         },
-        isLogin: true
+        regControl: {
+            name: {
+                elementType: 'input',
+                config: {
+                    type: 'text',
+                    placeholder: 'Your Name'
+                },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                isTouched: false
+            },
+            zipcode: {
+                elementType: 'input',
+                config: {
+                    type: 'text',
+                    placeholder: 'Zip Code'
+                },
+                value: '',
+                validation: {
+                    required: true,
+                    minLength: 5,
+                    maxLength: 6
+                },
+                valid: false,
+                isTouched: false
+            },
+            street: {
+                elementType: 'input',
+                config: {
+                    type: 'textarea',
+                    placeholder: 'Your Street'
+                },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                isTouched: false
+            },
+            country: {
+                elementType: 'input',
+                config: {
+                    type: 'text',
+                    placeholder: 'Your Country'
+                },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                isTouched: false
+            },
+            email: {
+                elementType: 'input',
+                config: {
+                    type: 'email',
+                    placeholder: 'Your Email'
+                },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                isTouched: false
+            },
+        },
+        isLogin: true,
     }
+
     checkValidity(value, rules) {
         let isValid = true
         if (rules.required) {
@@ -85,9 +157,17 @@ class Auth extends Component {
         return buttonProps
     }
     toggleLogin = () => {
+        console.log(this.state.isLogin)
+        // if (!this.state.isLogin) {
+        //     pathName = '/Auth/register'
+        // }
+        // else if (this.state.isLogin) {
+        //     pathName = '/Auth/login'
+        // }
         this.setState(prevState => {
+            this.props.history.push(!prevState.isLogin ? '/Auth/login' : '/Auth/register')
             return {
-                isLogin: !prevState.isLogin
+                isLogin: !prevState.isLogin,
             }
         })
     }
