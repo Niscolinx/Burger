@@ -7,7 +7,6 @@ const initialState = {
     tokenId: null,
     userId: null
 }
-
 const authState = (state, action) => {
     return update(state, {
         loading: true

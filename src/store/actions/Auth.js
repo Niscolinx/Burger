@@ -1,5 +1,6 @@
 import * as actions from './actionTypes'
-import axios from 'axios'
+import fire from '../../firebase/firebase'
+
 
 export const authStart = () => {
     return {
@@ -22,26 +23,23 @@ export const authFailed = (error) => {
 }
 
 export const initAuth = (email, password, isLogin) => {
-    const info = {
-        email: email,
-        password: password,
-        returnSecureToken: true
-    }
+    
     return dispatch => {
         dispatch(authStart())
         // let url = 'https://dentitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
         // if (!isLogin) {
         //     url = 'https://cors-anywhere.herokuapp.com/https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
         // }
-        let url = 
-        console.log(url)
-        axios.post(url, info)
-            .then(res => {
-                console.log(res)
+        let url = fire.auth().signInWithEmailAndPassword(email,password)
+        if(!isLogin){
+            url = fire.auth().createUserWithEmailAndPassword(email, password)
+        }
+        url.then(res => {
+                console.log(res.data, 'success')
                 dispatch(authSuccess(res.data))
             })
             .catch(err => {
-                console.log(err)
+                console.log(err, 'failure')
                 dispatch(authFailed(err))
             })
     }

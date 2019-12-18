@@ -138,7 +138,7 @@ class Auth extends Component {
     }
     loginButton = (e) => {
         e.preventDefault()
-        this.props.onInitAuth(this.state.control.email.value, this.state.control.email.value, this.state.isLogin)
+        this.props.onInitAuth(this.state.control.email.value, this.state.control.password.value, this.state.isLogin)
     }
 
 
@@ -157,13 +157,7 @@ class Auth extends Component {
         return buttonProps
     }
     toggleLogin = () => {
-        console.log(this.state.isLogin)
-        // if (!this.state.isLogin) {
-        //     pathName = '/Auth/register'
-        // }
-        // else if (this.state.isLogin) {
-        //     pathName = '/Auth/login'
-        // }
+     
         this.setState(prevState => {
             this.props.history.push(!prevState.isLogin ? '/Auth/login' : '/Auth/register')
             return {
