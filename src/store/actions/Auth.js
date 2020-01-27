@@ -17,8 +17,8 @@ export const authSuccess = (auth) => {
 
 export const authFailed = (error) => {
     return {
-        type: actions.AUTH_FAILED,
-        error: error
+        type: actions.AUTH_FAILED, 
+        error
     }
 }
 
@@ -26,10 +26,7 @@ export const initAuth = (email, password, isLogin) => {
     
     return dispatch => {
         dispatch(authStart())
-        // let url = 'https://dentitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
-        // if (!isLogin) {
-        //     url = 'https://cors-anywhere.herokuapp.com/https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCkxoSmDMAvGH5Uyd2XQuk6ghxHOTjhSB4'
-        // }
+       
         let url = fire.auth().signInWithEmailAndPassword(email,password)
         if(!isLogin){
             url = fire.auth().createUserWithEmailAndPassword(email, password)
@@ -39,8 +36,7 @@ export const initAuth = (email, password, isLogin) => {
                 dispatch(authSuccess(res.data))
             })
             .catch(err => {
-                console.log(err, 'failure')
-                dispatch(authFailed(err))
+                dispatch(authFailed(err.message))
             })
     }
 }

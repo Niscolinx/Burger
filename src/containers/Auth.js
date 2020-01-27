@@ -38,75 +38,7 @@ class Auth extends Component {
                 isTouched: false
             }
         },
-        regControl: {
-            name: {
-                elementType: 'input',
-                config: {
-                    type: 'text',
-                    placeholder: 'Your Name'
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                isTouched: false
-            },
-            zipcode: {
-                elementType: 'input',
-                config: {
-                    type: 'text',
-                    placeholder: 'Zip Code'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    minLength: 5,
-                    maxLength: 6
-                },
-                valid: false,
-                isTouched: false
-            },
-            street: {
-                elementType: 'input',
-                config: {
-                    type: 'textarea',
-                    placeholder: 'Your Street'
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                isTouched: false
-            },
-            country: {
-                elementType: 'input',
-                config: {
-                    type: 'text',
-                    placeholder: 'Your Country'
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                isTouched: false
-            },
-            email: {
-                elementType: 'input',
-                config: {
-                    type: 'email',
-                    placeholder: 'Your Email'
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                isTouched: false
-            },
-        },
+        
         isLogin: true,
     }
 
@@ -173,6 +105,11 @@ class Auth extends Component {
                 config: this.state.control[key]
             })
         }
+
+        let errorMessage;
+        if(this.props.error){
+            errorMessage = this.props.error
+        }
         let form = <div className='contactForm'>
             {elementTypeArr.map(elementType => {
                 return <Input
@@ -194,6 +131,7 @@ class Auth extends Component {
 
         return (
             <div className='loginForm'>
+                {errorMessage}
                 <form onSubmit={this.loginButton}>
                     {form}
                     <Button
@@ -211,7 +149,8 @@ class Auth extends Component {
 }
 const mapStateToProps = state => {
     return {
-        loading: state.auth.loading
+        loading: state.auth.loading,
+        error: state.auth.error
     }
 }
 const mapDispatchToProps = dispatch => {
