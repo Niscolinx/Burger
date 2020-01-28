@@ -4,8 +4,8 @@ import update from '../utility'
 const initialState = {
     error: null,
     loading: false,
-    tokenId: null,
-    userId: null
+    userId: null,
+    tokenId: null
 }
 const authState = (state, action) => {
     return update(state, {
@@ -17,8 +17,8 @@ const authSuccess = (state, action) => {
     return update(state, {
         ...action,
         loading: false,
-        tokenId: action.tokenId,
-        userId: action.userId
+        userId: action.userId,
+        tokenId: action.tokenId
     })
 }
 
@@ -29,11 +29,21 @@ const authFailed = (state, action) => {
     })
 }
 
+const authLogOut = (state, action) => {
+    return update(state, {
+        ...action,
+        loading: false,
+        userId: null,
+        tokenId: null
+    })
+}
+
 const auth = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START: return authState(state, action)
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
         case actionTypes.AUTH_FAILED: return authFailed(state, action);
+        case actionTypes.AUTH_LOGOUT: return authLogOut(state, action)
         default: return state
 
     }
