@@ -207,7 +207,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitBurgerStart: (data) => dispatch(orderAction.initBurgerStart(data))
+    onInitBurgerStart: (token, data) => dispatch(orderAction.initBurgerStart(token, data))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));

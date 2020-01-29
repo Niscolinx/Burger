@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
+
 import Button from '../components/Modal/Button'
 import Input from '../components/Layout/Input'
 import { connect } from 'react-redux'
@@ -38,8 +40,14 @@ class Auth extends Component {
                 isTouched: false
             }
         },
-        
+
         isLogin: true,
+    }
+
+    componentDidUpdate() {
+        console.log(this.props.auth)
+        return this.props.auth ? <Redirect to='/Orders'/> : null
+        //this.props.history.push('/') : null
     }
 
     checkValidity(value, rules) {
@@ -89,7 +97,7 @@ class Auth extends Component {
         return buttonProps
     }
     toggleLogin = () => {
-     
+
         this.setState(prevState => {
             this.props.history.push(!prevState.isLogin ? '/Auth/login' : '/Auth/register')
             return {
@@ -107,7 +115,7 @@ class Auth extends Component {
         }
 
         let errorMessage;
-        if(this.props.error){
+        if (this.props.error) {
             errorMessage = this.props.error
         }
         let form = <div className='contactForm'>
@@ -150,7 +158,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        auth: state.auth.tokenId
     }
 }
 const mapDispatchToProps = dispatch => {

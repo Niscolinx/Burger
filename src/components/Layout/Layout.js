@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions/actionTypes'
+import * as actions from '../../store/actions/burgerIndex';
 
 import Aux from '../hoc/HigherOrder';
 import Toolbar from './Toolbar';
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogOut: () => (dispatch(actions.AUTH_LOGOUT))
+        onLogOut: () => (dispatch(actions.logOut()))
     }
 }
 

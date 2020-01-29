@@ -29,7 +29,6 @@ export const orderRedirect = () => {
 
 export const initBurgerStart = (token, data) => {
 
-    console.log('This is the token', token, "this is the data", data)
     return dispatch => {
         dispatch(orderBurgerSuccess())
         axios
