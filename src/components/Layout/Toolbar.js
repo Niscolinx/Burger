@@ -9,7 +9,9 @@ const toolbar = (props)=>(
         <Logo/>
         <div>
             <nav className = 'desktopOnly'>
-                <NavigationItems/>
+                <NavigationItems auth = {props.auth}
+                            logOut = {props.logOut}
+                        />
             </nav>
         </div>
     </div>

@@ -48,7 +48,7 @@ export const checkAuth = (auth) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logOut())
-        }, 10000)
+        }, 100000)
     }
 }
 

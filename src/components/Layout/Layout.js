@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/actionTypes'
 
 import Aux from '../hoc/HigherOrder';
 import Toolbar from './Toolbar';
@@ -23,9 +25,13 @@ class Layout extends Component{
     render(){
         return(
             <Aux>
-            <Toolbar openSideDrawer = {this.switchSideDrawerHandler}/>
+            <Toolbar openSideDrawer = {this.switchSideDrawerHandler}
+                    auth = {this.props.auth}
+                    logOut = {this.props.onLogOut}
+            />
             <SideDrawer closed = {this.sideDrawerHide} 
                 open = {this.state.sideDrawerShow}
+                auth = {this.props.auth}
             />
             <main className = 'content'>
                 {this.props.children}
@@ -33,6 +39,20 @@ class Layout extends Component{
             </Aux>
         )
     }
+
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth.tokenId
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogOut: () => (dispatch(actions.AUTH_LOGOUT))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

@@ -22,7 +22,7 @@ const store = createStore(combineReducers(rootReducer), composeEnhancers(applyMi
 const app = (
     <Provider store={store}>
         <BrowserRouter>
-            <App />
+            <App/>
         </BrowserRouter>
     </Provider>
 )
