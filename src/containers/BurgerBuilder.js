@@ -76,6 +76,7 @@ class BurgerBuilder extends Component {
             addIngredient={this.props.onAddIngredient}
             removeIngredient={this.props.onRemoveIngredient}
             price={this.props.totalPrice}
+            auth = {this.props.auth}
           />
           ;
         </Aux>
@@ -109,7 +110,8 @@ const mapStateToProps = state => {
   return {
     ingredients: state.burger.ingredients,
     totalPrice: state.burger.totalPrice,
-    error: state.burger.error
+    error: state.burger.error,
+    auth: state.auth.tokenId
   }
 }
 const mapDispatchToProps = dispatch => {
