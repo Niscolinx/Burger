@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 
 import Button from '../components/Modal/Button'
 import Input from '../components/Layout/Input'
@@ -45,9 +44,11 @@ class Auth extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.props.auth)
-        return this.props.auth ? <Redirect to='/Orders'/> : null
-        //this.props.history.push('/') : null
+        if(this.props.auth){
+            return this.props.totalPrice > 4 ?
+             this.props.history.push('/Checkout') : this.props.history.push('/')
+        }
+      
     }
 
     checkValidity(value, rules) {
@@ -159,7 +160,8 @@ const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
-        auth: state.auth.tokenId
+        auth: state.auth.tokenId,
+        totalPrice: state.burger.totalPrice
     }
 }
 const mapDispatchToProps = dispatch => {

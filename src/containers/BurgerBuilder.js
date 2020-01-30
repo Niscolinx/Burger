@@ -18,9 +18,15 @@ class BurgerBuilder extends Component {
   };
 
   orderSummary = () => {
-    this.setState({
-      orderSummary: true
-    });
+    if (!this.props.auth) {
+      return this.props.history.push('/Auth/login')
+    }
+    else {
+      this.setState({
+        orderSummary: true
+      });
+
+    }
   };
 
   orderCancel = () => {
@@ -76,7 +82,7 @@ class BurgerBuilder extends Component {
             addIngredient={this.props.onAddIngredient}
             removeIngredient={this.props.onRemoveIngredient}
             price={this.props.totalPrice}
-            auth = {this.props.auth}
+            auth={this.props.auth}
           />
           ;
         </Aux>

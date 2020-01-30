@@ -8,7 +8,12 @@ const controls = [
     { label: 'Meat', type: 'meat' },
 ];
 
+const redirectToSignUp = (props) =>{
+    return props.summary
+   //props.auth ? props.summary : <Redirect to = '/Auth/login'/>
+}
 const buildControls = (props) => (
+
 
     <div className='BuildControls'>
         <h3>The price is ${props.price.toFixed(2)}</h3>
@@ -24,7 +29,7 @@ const buildControls = (props) => (
         <div className='btn-order'>
             <button
                 disabled={!props.purchasable}
-                onClick={props.summary}>
+                onClick={redirectToSignUp(props)}>
                 {props.auth ? 'order now' : 'signUp to continue'}</button>
         </div>
     </div>
