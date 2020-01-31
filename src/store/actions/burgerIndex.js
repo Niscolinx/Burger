@@ -12,5 +12,9 @@ export {
     deleteAllOrders
 } from './order'
 
-export { initAuth, logOut } from './Auth'
+export {
+    initAuth,
+    logOut,
+    clearError
+} from './Auth'
 

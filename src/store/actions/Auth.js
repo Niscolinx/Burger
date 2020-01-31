@@ -49,6 +49,13 @@ export const logOut = () => {
     }
 }
 
+export const clearError = () => {
+
+    return{
+        type: actions.AUTH_CLEAR_ERROR
+    }
+}
+
 export const initAuth = (email, password, isLogin) => {
 
     return dispatch => {
