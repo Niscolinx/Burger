@@ -10,6 +10,9 @@ export const authStart = () => {
 
 export const authSuccessCheck = (auth) => {
 
+    let token = localStorage.setItem('token', auth)
+    console.log(token, auth)
+
     return dispatch => {
         let user = fire.auth().currentUser;
         let token = user.getIdToken()
@@ -39,16 +42,10 @@ export const authFailed = (error) => {
 }
 
 export const logOut = () => {
+    localStorage.removeItem('token')
+
     return {
         type: actions.AUTH_LOGOUT
-    }
-}
-export const checkAuth = (auth) => {
-
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logOut())
-        }, 100000)
     }
 }
 
@@ -63,7 +60,6 @@ export const initAuth = (email, password, isLogin) => {
         }
         url.then(res => {
             dispatch(authSuccessCheck(res.user.uid))
-            dispatch(checkAuth(res.user.uid))
         })
             .catch(err => {
                 dispatch(authFailed(err.message))

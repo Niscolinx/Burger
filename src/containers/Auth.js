@@ -8,7 +8,7 @@ import Spinner from '../components/Layout/spinner'
 
 
 class Auth extends Component {
-
+    
     state = {
         control: {
             email: {
@@ -39,16 +39,18 @@ class Auth extends Component {
                 isTouched: false
             }
         },
-
+        
         isLogin: true,
     }
 
+
     componentDidUpdate() {
-        if(this.props.auth){
-            return this.props.totalPrice > 4 ?
-             this.props.history.push('/Checkout') : this.props.history.push('/')
+        
+        if (this.props.auth) {
+            this.props.totalPrice > 4 ?
+                this.props.history.push('/Checkout') : this.props.history.push('/')
         }
-      
+
     }
 
     checkValidity(value, rules) {
@@ -107,6 +109,8 @@ class Auth extends Component {
         })
     }
     render() {
+
+
         let elementTypeArr = []
         for (let key in this.state.control) {
             elementTypeArr.push({
@@ -119,6 +123,12 @@ class Auth extends Component {
         if (this.props.error) {
             errorMessage = this.props.error
         }
+        else{
+            errorMessage = ''
+        }
+        
+        
+
         let form = <div className='contactForm'>
             {elementTypeArr.map(elementType => {
                 return <Input
