@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import * as actions from '../store/actions/burgerIndex'
 
 import '../App.scss'
@@ -14,33 +14,53 @@ import Auth from '../containers/Auth'
 
 class App extends Component {
 
-  componentDidMount(){
-    if(localStorage.getItem('token')){
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
       this.props.onCheckState(localStorage.getItem('token'), localStorage.getItem('userId'))
     }
   }
 
   render() {
+
+    let AuthGuard = (
+      <Switch>
+        <Route path='/' exact component={BurgerBuilder} />
+        <Route path='/Auth/login' component={Auth} />
+        <Route path='/Auth/register' component={Auth} />
+        <Redirect to='/'/>
+      </Switch>
+    )
+    if (this.props.auth) {
+      AuthGuard = (
+        <Switch>
+          <Route path='/' exact component={BurgerBuilder} />
+          <Route path='/Checkout' component={Checkout} />
+          <Route path='/Orders' component={Orders} />
+          <Redirect to='/' />
+        </Switch>
+
+      )
+    }
     return (
       <Aux>
         <Layout>
-          <Switch>
-            <Route path='/Checkout' component={Checkout} />
-            <Route path='/Orders' component={Orders} />
-            <Route path='/' exact component={BurgerBuilder} />
-            <Route path='/Auth/login' component={Auth} />
-            <Route path='/Auth/register' component={Auth} />
-          </Switch>
+          {AuthGuard}
         </Layout>
       </Aux>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    onCheckState : (tokenId, userId) => dispatch(actions.authSuccess(tokenId, userId))
+    auth: state.auth.tokenId
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(App));
+const mapDispatchToProps = dispatch => {
+  return {
+    onCheckState: (tokenId, userId) => dispatch(actions.authSuccess(tokenId, userId))
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
