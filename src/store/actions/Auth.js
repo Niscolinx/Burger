@@ -10,17 +10,22 @@ export const authStart = () => {
 
 export const authSuccessCheck = (auth) => {    
     return dispatch => {
+
+
         let user = fire.auth().currentUser;
         let token = user.getIdToken()
         token.then((res) => {
              localStorage.setItem('userId', auth)
              localStorage.setItem('token', res)
                dispatch(authSuccess(auth, res))
+
+               setTimeout(() => {
+                   dispatch(logOut())
+               }, 3600);
             })
             .catch((err) => {
                 dispatch(authFailed(err))
             })
-
     }
 }
 
@@ -48,6 +53,7 @@ export const logOut = () => {
     }
 }
 
+
 export const clearError = () => {
 
     return{
@@ -67,8 +73,8 @@ export const initAuth = (email, password, isLogin) => {
         url.then(res => {
             dispatch(authSuccessCheck(res.user.uid))
         })
-            .catch(err => {
-                dispatch(authFailed(err.message))
-            })
+        .catch(err => {
+            dispatch(authFailed(err.message))
+        })
     }
 }
