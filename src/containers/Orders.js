@@ -9,7 +9,7 @@ import Spinner from '../components/Layout/spinner'
 class Orders extends Component {
 
     componentDidMount() {
-        this.props.onInitFetchedOrders(this.props.authorization)
+        this.props.onInitFetchedOrders(this.props.auth, this.props.userId)
     }
 
     render() {
@@ -34,13 +34,14 @@ const mapStateToProps = state => {
     return {
         loading: state.order.loading,
         order: state.order.order,
-        authorization: state.auth.tokenId
+        auth: state.auth.tokenId,
+        userId: state.auth.userId
 
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onInitFetchedOrders: (auth) => dispatch(actions.fetchedOrdersInit(auth)),
+        onInitFetchedOrders: (auth, userId) => dispatch(actions.fetchedOrdersInit(auth, userId)),
         onDeleteOrder: (id) => dispatch(actions.fetchedOrderDelete(id)),
         onDeleteAllOrders: () => dispatch(actions.deleteAllOrders())
     }

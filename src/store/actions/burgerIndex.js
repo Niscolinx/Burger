@@ -15,6 +15,7 @@ export {
 export {
     initAuth,
     logOut,
-    clearError
+    clearError,
+    authSuccess
 } from './Auth'
 

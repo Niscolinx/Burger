@@ -43,9 +43,8 @@ class BurgerBuilder extends Component {
     if(this.props.authErr){
       this.props.onClearErr()
     }
-   // if(!localStorage.getItem('token')){
       this.props.onInitIngredients()
-   //}
+   
   };
 
   orderbtn = newIng => {

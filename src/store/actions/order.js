@@ -5,7 +5,7 @@ export const orderBurgerStart = (id, orderData) => {
     return {
         type: orderActions.BURGER_ORDER_START,
         orderId: id,
-        orderData: orderData
+        orderData: orderData,
     }
 }
 
@@ -73,23 +73,29 @@ export const deleteAllOrders = () => {
 export const fetchedOrderSuccess = (order) => {
     return {
         type: orderActions.FETCHED_ORDERS_SUCCESS,
-        orders: order
+        order
     }
 }
 
-export const fetchedOrdersInit = (token) => {
+export const fetchedOrdersInit = (token, userId) => {
     return dispatch => {
         dispatch(fetchedOrderStart())
         axios.get('/orders.json?auth=' + token)
             .then(res => {
                 const fetchedOrders = []
+                const fetchedOrdersById = []
                 for (let key in res.data) {
                     fetchedOrders.push({
                         ...res.data[key],
-                        id: key
+                        id: key,
                     })
                 }
-                dispatch(fetchedOrderSuccess(fetchedOrders))
+                for(let i of fetchedOrders){
+                    if(fetchedOrders[i].userId === userId){
+                        fetchedOrdersById.push(fetchedOrders[i])
+                    }
+                }
+                dispatch(fetchedOrderSuccess(fetchedOrdersById))
             })
             .catch(err => {
                 dispatch(fetchedOrdersFailed(err))

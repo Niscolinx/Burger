@@ -21,9 +21,10 @@ export const initIngredients = (ing) => {
         ingredients: ing
     }
 }
-export const loadIngFailed = () => {
+export const loadIngFailed = (error) => {
     return {
-        type: actionTypes.LOAD_INGREDIENTS_FAILED
+        type: actionTypes.LOAD_INGREDIENTS_FAILED,
+        error: error
     }
 }
 export const setIngredients = () => {
@@ -34,7 +35,7 @@ export const setIngredients = () => {
                 dispatch(initIngredients(res.data))
             })
             .catch(error => {
-                dispatch(loadIngFailed())
+                dispatch(loadIngFailed(error))
             })
     }
 }

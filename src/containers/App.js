@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import * as actions from '../store/actions/burgerIndex'
+
 import '../App.scss'
 import Layout from "../components/Layout/Layout"
 import Aux from "../components/hoc/HigherOrder"
@@ -9,6 +13,12 @@ import Orders from './Orders'
 import Auth from '../containers/Auth'
 
 class App extends Component {
+
+  componentDidMount(){
+    if(localStorage.getItem('token')){
+      this.props.onCheckState(localStorage.getItem('token'), localStorage.getItem('userId'))
+    }
+  }
 
   render() {
     return (
@@ -27,5 +37,10 @@ class App extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onCheckState : (tokenId, userId) => dispatch(actions.authSuccess(tokenId, userId))
+  }
+}
 
-export default App;
+export default withRouter(connect(null, mapDispatchToProps)(App));

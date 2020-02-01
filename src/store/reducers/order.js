@@ -14,49 +14,49 @@ const orderReducer = (state = initialState, action) => {
                 ...action.orderData,
                 id: action.orderId
             }
-            console.log(newOrder.id)
             return {
                 ...state,
                 loading: false,
                 order: state.order.concat(newOrder),
                 purchased: true
             }
-        case orderActions.BURGER_ORDER_FAILED:
+            case orderActions.BURGER_ORDER_FAILED:
             return {
                 ...state,
                 loading: false,
-
+                
             }
-        case orderActions.BURGER_ORDER_SUCCESS:
-            return {
+            case orderActions.BURGER_ORDER_SUCCESS:
+                return {
                 ...state,
                 loading: true
             }
-        case orderActions.ORDER_REDIRECT:
-            return {
+            case orderActions.ORDER_REDIRECT:
+                return {
                 ...state,
                 purchased: false
             }
-        case orderActions.FETCHED_ORDERS_START:
+            case orderActions.FETCHED_ORDERS_START:
             return {
                 ...state,
                 loading: true
             }
         case orderActions.FETCHED_ORDERS_SUCCESS:
+            console.log(action.order)
             return {
                 ...state,
                 loading: false,
-                order: action.orders.reverse()
+                order: action.order.reverse()
             }
-        case orderActions.FETCHED_ORDERS_FAILED:
-            return {
-                ...state,
-                loading: false,
+            case orderActions.FETCHED_ORDERS_FAILED:
+                return {
+                    ...state,
+                    loading: false,
                 error: action.error
             }
         case orderActions.FETCHED_ORDERS_DELETE:
-            const orders = [...state.order]
-            const updateOrders = orders.filter(order => order.id !== action.id)
+            const order = [...state.order]
+            const updateOrders = order.filter(order => order.id !== action.id)
             return {
                 ...state,
                 order: updateOrders

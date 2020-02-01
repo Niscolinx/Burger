@@ -8,15 +8,13 @@ export const authStart = () => {
     }
 }
 
-export const authSuccessCheck = (auth) => {
-
-    let token = localStorage.setItem('token', auth)
-    console.log(token, auth)
-
+export const authSuccessCheck = (auth) => {    
     return dispatch => {
         let user = fire.auth().currentUser;
         let token = user.getIdToken()
         token.then((res) => {
+             localStorage.setItem('userId', auth)
+             localStorage.setItem('token', res)
                dispatch(authSuccess(auth, res))
             })
             .catch((err) => {
@@ -43,6 +41,7 @@ export const authFailed = (error) => {
 
 export const logOut = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('userId')
 
     return {
         type: actions.AUTH_LOGOUT
