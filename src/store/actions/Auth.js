@@ -21,7 +21,7 @@ export const authSuccessCheck = (auth) => {
 
                setTimeout(() => {
                    dispatch(logOut())
-               }, 3600);
+               }, 3600 * 1000);
             })
             .catch((err) => {
                 dispatch(authFailed(err))

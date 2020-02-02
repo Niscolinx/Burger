@@ -83,19 +83,17 @@ export const fetchedOrdersInit = (token, userId) => {
         axios.get('/orders.json?auth=' + token)
             .then(res => {
                 const fetchedOrders = []
-                const fetchedOrdersById = []
                 for (let key in res.data) {
-                    fetchedOrders.push({
-                        ...res.data[key],
-                        id: key,
-                    })
-                }
-                for(let i of fetchedOrders){
-                    if(fetchedOrders[i].userId === userId){
-                        fetchedOrdersById.push(fetchedOrders[i])
+                    if(res.data[key].userId === userId){
+                        fetchedOrders.push({
+                            ...res.data[key],
+                            id: key,
+                        })
+
                     }
                 }
-                dispatch(fetchedOrderSuccess(fetchedOrdersById))
+               
+                dispatch(fetchedOrderSuccess(fetchedOrders))
             })
             .catch(err => {
                 dispatch(fetchedOrdersFailed(err))
