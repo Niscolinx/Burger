@@ -16,7 +16,7 @@ const sideDrawer = (props) => {
         <Backdrop orderSummary = {props.open}
                 clicked = {props.closed}
         />
-        <div className = {assigned.join(' ')}>
+            <div className={assigned.join(' ')} onClick={props.clicked}>
         <Logo height = "30px"/>
         <nav>
             <NavigationItems/>

@@ -112,7 +112,7 @@ class BurgerBuilder extends Component {
         </Modal>
         {burger}
       </div>
-    );
+    )
   }
 }
 
