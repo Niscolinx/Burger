@@ -10,8 +10,17 @@ configure({
 })
 
 describe('<Navigation/>', (() => {
+
+    let wrapper;
+    beforeEach(() => {
+        wrapper = shallow(<NavigationItems />)
+    })
+
     it('should return three navigation items', () => {
-        const wrapper = shallow(<NavigationItems/>)
+        expect(wrapper.find(NavigationItem)).toHaveLength(3)
+    })
+    it('should return three navigation items', () => {
+        wrapper = shallow(<NavigationItems  auth/>)
         expect(wrapper.find(NavigationItem)).toHaveLength(3)
     })
 }))
