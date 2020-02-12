@@ -12,7 +12,7 @@ import OrderSummary from "../components/Modal/OrderSummary"
 import * as actions from '../store/actions/burgerIndex'
 
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
   state = {
     orderSummary: false,
   };
