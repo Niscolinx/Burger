@@ -9,21 +9,21 @@ const controls = [
 ];
 
 const redirectToSignUp = (props) =>{
+    console.log(props)
     return props.summary
    //props.auth ? props.summary : <Redirect to = '/Auth/login'/>
 }
 const buildControls = (props) => (
 
-
     <div className='BuildControls'>
         <h3>The price is ${props.price.toFixed(2)}</h3>
         {controls.map(ctrl => {
             return <BuildControl
-                key={ctrl.label}
-                label={ctrl.label}
-                added={() => props.addIngredient(ctrl.type)}
-                remove={() => props.removeIngredient(ctrl.type)}
-                disabled={props.disabled[ctrl.type]}
+            key={ctrl.label}
+            label={ctrl.label}
+            added={() => props.addIngredient(ctrl.type)}
+            remove={() => props.removeIngredient(ctrl.type)}
+            disabled={props.disabled[ctrl.type]}
             />
         })}
         <div className='btn-order'>
