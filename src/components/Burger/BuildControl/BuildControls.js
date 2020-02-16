@@ -10,6 +10,7 @@ const controls = [
 
 const redirectToSignUp = (props) =>{
     console.log(props)
+    console.log('This is the props', props)
     return props.summary
    //props.auth ? props.summary : <Redirect to = '/Auth/login'/>
 }
