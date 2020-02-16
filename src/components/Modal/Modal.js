@@ -5,6 +5,7 @@ import Backdrop from '../../components/Modal/Backdrop';
 class Modal extends Component{
 
     shouldComponentUpdate(nextProps){
+        console.log(nextProps)
         return nextProps.orderSummary !== this.props.orderSummary || nextProps.children !== this.props.children
     } 
 
