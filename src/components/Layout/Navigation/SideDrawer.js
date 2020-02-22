@@ -5,6 +5,8 @@ import Backdrop from '../../Modal/Backdrop';
 import Aux from '../../hoc/HigherOrder';
 
 const sideDrawer = (props) => {
+    console.log(props)
+
     let assigned = ['sideDrawer', 'close'];
     if(props.open){
         assigned = ['sideDrawer', 'open']
@@ -19,7 +21,7 @@ const sideDrawer = (props) => {
             <div className={assigned.join(' ')} onClick={props.clicked}>
         <Logo height = "30px"/>
         <nav>
-            <NavigationItems/>
+            <NavigationItems auth = {props.auth}/>
         </nav>
 
         </div>
