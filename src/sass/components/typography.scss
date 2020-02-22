@@ -252,11 +252,16 @@
 
     img {
         height: 100%;
+        
+        @media (max-width: 500px) {
+            margin-left: -2rem;
+        }
     }
 
     @media (max-width: 500px) {
         display: flex;
-        flex-basis: 4px;
+        align-self: center;
+        justify-content: center;
         background: transparent;
         margin: 0 auto;
     }
