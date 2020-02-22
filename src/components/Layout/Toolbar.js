@@ -4,6 +4,7 @@ import NavigationItems from './Navigation/NavigationItems'
 import SideDrawerToggle from './Navigation/SideDrawerToggle';
 
 const toolbar = (props)=>(
+    <div className = 'toolbar-space'>
     <div className = 'toolbar'>
         <SideDrawerToggle clicked = {props.openSideDrawer}/>
         <Logo/>
@@ -14,6 +15,7 @@ const toolbar = (props)=>(
                         />
             </nav>
         </div>
+    </div>
     </div>
 )
 
