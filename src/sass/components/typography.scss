@@ -10,7 +10,8 @@
 
 @media (min-width: 1000px) and (min-height: 700px) {
     .burger {
-        width: 700px;
+        margin-top: 2rem;
+        width: 400px;
         height: 500px;
     }
 }
@@ -138,11 +139,7 @@
         }
     }
 
-    @media (max-width: 414px) {
-        & {
-            font-size: 5px;
-        }
-    }
+   
 
     @media (max-width: 375px) {
         & {
@@ -238,7 +235,7 @@
     color: white;
     border: 5px;
     padding: 10px;
-    height: 40px;
+    height: 55px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -252,17 +249,15 @@
 }
 
 .logo {
-    height: 100%;
+    height: 40px;
     width: auto;
-    background: white;
-    border-radius: 5px;
+
     img {
         height: 100%;
     }
 
     @media (max-width: 500px) {
         width: 50px;
-        height: 100%;
         background: transparent;
         margin: 0 auto;
     }
