@@ -88,7 +88,6 @@ export class BurgerBuilder extends Component {
             price={this.props.totalPrice}
             auth={this.props.auth}
           />
-          ;
         </Aux>
       );
       totalSummary = (
