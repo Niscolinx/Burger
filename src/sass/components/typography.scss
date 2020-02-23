@@ -141,7 +141,11 @@
 
     @media (max-width: 375px) {
         & {
+            position: absolute;
+            left: 1;
+            right: 0;
             width: 100%;
+         
         }
     }
 
