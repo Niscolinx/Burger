@@ -86,7 +86,7 @@
 }
 
 .BuildControls {
-    width: 70%;
+    width: 80%;
     display: flex;
     flex-flow: column;
     background: #D39952;
@@ -138,6 +138,7 @@
     @media (max-width: 375px) {
         & {
             width: 100%;
+            margin-left: inherit;
         }
     }
 
@@ -208,6 +209,10 @@
 
 .Success {
     color: #5C9210;
+    
+    @media (max-width: 415px){
+        font-size: .8rem;
+    }
 }
 
 .disAbled {
@@ -218,6 +223,10 @@
 
 .Danger {
     color: #944317;
+
+    @media (max-width: 415px) {
+        font-size: .8rem;
+    }
 }
 
 
