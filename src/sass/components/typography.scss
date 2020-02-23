@@ -9,16 +9,19 @@
     font-size: 1.2rem;
 
     @media (max-width: 1000px) {
-            width: 400px;
-            height: 500px;
-            
-        }
-        
-        @media (max-width: 500px){
-            margin-bottom: 2rem;
-            width: 250px;
-            height: 300px;
-        
+        width: 400px;
+        height: 500px;
+
+    }
+
+    @media (max-width: 500px) {
+        margin-bottom: 2rem;
+        width: 250px;
+        height: 300px;
+    }
+    @media (max-width: 415px) {
+        font-weight: 400;
+        font-size: .8rem;
     }
 }
 
@@ -133,12 +136,13 @@
         }
     }
 
-   
+
 
     @media (max-width: 375px) {
         & {
-            width: 100%;
-            margin-left: inherit;
+            width: 105%;
+            margin-left: -.5rem;
+            overflow-x: hidden;
         }
     }
 
@@ -209,8 +213,8 @@
 
 .Success {
     color: #5C9210;
-    
-    @media (max-width: 415px){
+
+    @media (max-width: 415px) {
         font-size: .8rem;
     }
 }
@@ -247,7 +251,7 @@
     box-sizing: border-box;
 }
 
-.toolbar-space{
+.toolbar-space {
     margin-bottom: 5rem;
 }
 
@@ -261,7 +265,7 @@
 
     img {
         height: 100%;
-        
+
         @media (max-width: 500px) {
             margin-left: -2rem;
         }
