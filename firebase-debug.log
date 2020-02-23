@@ -1,0 +1,37 @@
+[debug] [2020-02-23T07:16:00.799Z] ----------------------------------------------------------------------
+[debug] [2020-02-23T07:16:00.805Z] Command:       /usr/bin/node /usr/local/bin/firebase deploy
+[debug] [2020-02-23T07:16:00.805Z] CLI Version:   7.13.0
+[debug] [2020-02-23T07:16:00.805Z] Platform:      linux
+[debug] [2020-02-23T07:16:00.805Z] Node Version:  v10.15.2
+[debug] [2020-02-23T07:16:00.875Z] Time:          Sun Feb 23 2020 08:16:00 GMT+0100 (West Africa Standard Time)
+[debug] [2020-02-23T07:16:00.876Z] ----------------------------------------------------------------------
+[debug] [2020-02-23T07:16:00.876Z] 
+[debug] [2020-02-23T07:16:00.971Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-23T07:16:00.971Z] > authorizing via signed-in user
+[debug] [2020-02-23T07:16:00.972Z] [iam] checking project my-react-burger-1ce01 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-02-23T07:16:00.977Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-02-23T07:16:00.978Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-02-23T07:16:04.980Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-23T07:16:05.487Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/my-react-burger-1ce01:testIamPermissions  
+
+[debug] [2020-02-23T07:16:08.873Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-23T07:16:08.877Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/my-react-burger-1ce01  
+ 
+[debug] [2020-02-23T07:16:43.915Z] Server Error. Client network socket disconnected before secure TLS connection was established
+[debug] [2020-02-23T07:16:53.943Z] FirebaseError: Server Error. Client network socket disconnected before secure TLS connection was established
+    at Request._callback (/usr/local/lib/node_modules/firebase-tools/lib/api.js:30:31)
+    at self.callback (/usr/local/lib/node_modules/firebase-tools/node_modules/request/request.js:185:22)
+    at Request.emit (events.js:189:13)
+    at Request.EventEmitter.emit (domain.js:441:20)
+    at Request.onRequestError (/usr/local/lib/node_modules/firebase-tools/node_modules/request/request.js:877:8)
+    at ClientRequest.emit (events.js:194:15)
+    at ClientRequest.EventEmitter.emit (domain.js:441:20)
+    at TLSSocket.socketErrorListener (_http_client.js:392:9)
+    at TLSSocket.emit (events.js:189:13)
+    at TLSSocket.EventEmitter.emit (domain.js:441:20)
+    at emitErrorNT (internal/streams/destroy.js:82:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:50:3)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+[error] 
+[error] Error: Failed to get Firebase project my-react-burger-1ce01. Please make sure the project exists and your account has permission to access it.
