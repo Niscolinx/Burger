@@ -2,6 +2,7 @@ import React from 'react';
 import NavigationItem from './NavigationItem'
 
 const navigation = (props) => (
+    
     <ul className='navigationItems'>
 
         <NavigationItem link="/" exact>Burger Builder</NavigationItem>
