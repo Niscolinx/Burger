@@ -33,6 +33,7 @@ class Layout extends Component{
                 open = {this.state.sideDrawerShow}
                 auth = {this.props.auth}
                 clicked = {this.sideDrawerHide}
+                logOut = {this.props.onLogOut}
             />
             <main className = 'content'>
                 {this.props.children}
