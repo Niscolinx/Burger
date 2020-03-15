@@ -42,7 +42,6 @@ const orderReducer = (state = initialState, action) => {
                 loading: true
             }
         case orderActions.FETCHED_ORDERS_SUCCESS:
-            console.log(action.order)
             return {
                 ...state,
                 loading: false,
