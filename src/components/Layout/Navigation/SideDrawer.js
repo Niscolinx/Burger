@@ -8,24 +8,26 @@ const sideDrawer = (props) => {
     console.log('from the sidedrawer', props)
 
     let assigned = ['sideDrawer', 'close'];
-    if(props.open){
+    if (props.open) {
         assigned = ['sideDrawer', 'open']
     }
 
 
-    return(
+    return (
         <Aux>
-        <Backdrop orderSummary = {props.open}
-                clicked = {props.closed}
-        />
+            <Backdrop orderSummary={props.open}
+                clicked={props.closed}
+            />
             <div className={assigned.join(' ')} onClick={props.clicked}>
-        <Logo/>
-        <nav>
-            
-            <NavigationItems auth = {props.auth}/>
-        </nav>
+                <Logo />
+                <nav>
 
-        </div>
+                    <NavigationItems auth={props.auth}
+                        logOut={props.logOut}
+                    />
+                </nav>
+
+            </div>
         </Aux>
     )
 }
