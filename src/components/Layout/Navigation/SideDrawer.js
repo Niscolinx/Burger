@@ -21,6 +21,7 @@ const sideDrawer = (props) => {
             <div className={assigned.join(' ')} onClick={props.clicked}>
         <Logo/>
         <nav>
+            
             <NavigationItems auth = {props.auth}/>
         </nav>
 
