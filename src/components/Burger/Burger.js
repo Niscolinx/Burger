@@ -10,6 +10,7 @@ const burger = (props) =>{
         })
         
         .reduce((arr,ig) =>{
+             console.log('update')
             return( arr.concat(ig))
         }, []);
 
