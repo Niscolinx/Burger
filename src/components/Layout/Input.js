@@ -4,7 +4,7 @@ const input = (props) => {
     let inputElement = null
     let validateClass = []
     if ((!props.validate) && props.isTouched) {
-       console.log('validate') 
+   
         validateClass.push('notValid')
     }
 
