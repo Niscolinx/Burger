@@ -47,6 +47,7 @@ class Auth extends Component {
     componentDidUpdate() {
         
         if (this.props.auth) {
+           console.log('props')
             this.props.totalPrice > 4 ?
                 this.props.history.push('/Checkout') : this.props.history.push('/')
         }
